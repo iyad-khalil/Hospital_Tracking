@@ -103,8 +103,8 @@ root
 
 ### **2. Clone the Repository**
 ```bash
-git clone <repository-url>
-cd <repository-folder>
+git clone https://github.com/iyad-khalil/Hospital_Tracking.git
+cd Hospital_Tracking
 ```
 
 ### **3. Install Dependencies**
@@ -123,5 +123,6 @@ npm start
 
 ---
 
-#The Application is already deployed at 'http://hospitaltracking.s3-website-us-east-1.amazonaws.com/'
+### **6. Deployment in the Cloud**
+The Application is already deployed at 'http://hospitaltracking.s3-website-us-east-1.amazonaws.com/'
 
