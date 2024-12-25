@@ -1,0 +1,40 @@
+name: AWS S3 Deploy
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: NPM Install
+        run: npm install
+      - name: NPM Build
+        run: npm run build
+        env:
+          CI: false
+
+      - name: Deploy to S3 without index.html
+        uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --acl public-read --delete --exclude 'index.html'
+        env:
+          AWS_S3_BUCKET: hospitaltracking
+          AWS_ACCESS_KEY_ID: AKIAUQ4L3FASE2OGFFN5
+          AWS_SECRET_ACCESS_KEY: 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
+          AWS_REGION: us-east-1
+          SOURCE_DIR: "build"
